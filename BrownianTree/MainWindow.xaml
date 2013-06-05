@@ -1,0 +1,19 @@
+﻿<Window x:Class="BrownianTree.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Brownian Tree Generator" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Canvas Name="PaintCanvas" Width="750" Margin="0,0,400,0" Background="Gray">
+            
+        </Canvas>
+        <Button Width="100" Height="30" Margin="755,0,0,0" Content="Create Tree" Name="btCreate" Click="btCreate_Click"/>
+        <TextBox Width="100" Height="30" Margin="800,0,0,300" Name="tbXseed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <TextBox Width="100" Height="30" Margin="800,0,0,200" Name="tbYseed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <TextBox Width="100" Height="30" Margin="750,0,0,500" Name="tbNumParticles" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Height="30" Width="55" Margin="640,0,0,300" Content="X Value:" HorizontalContentAlignment="Center" />
+        <Label Height="30" Width="55" Margin="640,0,0,200" Content="Y Value:" HorizontalContentAlignment="Center" />
+        <Label Height="30" Width="150" Margin="755,0,0,360" Content="Seed Particle Coordinates" HorizontalContentAlignment="Center" />
+        <Label Height="30" Width="200" Margin="755,0,0,560" Content="(Stay under 25 for now!)" HorizontalContentAlignment="Center" />
+        <Label Height="30" Width="200" Margin="755,0,0,600" Content="Number of particles horizontally" HorizontalContentAlignment="Center" />
+    </Grid>
+</Window>
