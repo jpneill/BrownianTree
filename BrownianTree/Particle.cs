@@ -19,6 +19,7 @@ namespace BrownianTree
     {
         public Point position { get; set; }
         public ParticleType pType { get; set; }
+        public Vector velocity { get; set; }
 
         public enum ParticleType
         {
@@ -30,9 +31,11 @@ namespace BrownianTree
         {
         }
 
-        public Particle(int x, int y, ParticleType type)
+        public Particle(int x, int y, double xVel, double yVel, ParticleType type)
         {
             Point p = new Point(x, y);
+            Vector v = new Vector(xVel, yVel);
+            this.velocity = v;
             this.position = p;
             this.pType = type;
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace BrownianTree
 {
@@ -49,19 +50,16 @@ namespace BrownianTree
             Y
         }
 
-        public static double BrownianSolution(double mass, double Temp, double relaxTime, double timeStep, SolutionDimension XorY)
+        public static Vector BrownianSolution(double mass, double Temp, double relaxTime, double prevPosition, double prevVelocity, double timeStep, SolutionDimension XorY)
         {
-            /*************************************************************************************************
-             * !!Change return type to a vector since will need to return both the velocity and the position!!
-             **************************************************************************************************/ 
-            double result = 0;
+            Vector result;
             Random random = new Random();
 
             //Calculate G
             double U1, U2, G;
             U1 = random.NextDouble();
             U2 = random.NextDouble();
-            if(XorY == SolutionDimension.X)
+            if (XorY == SolutionDimension.X)
                 G = Math.Sqrt(-2 * (Math.Log(U1))) * Math.Cos(2 * Math.PI * U2);
             else
                 G = Math.Sqrt(-2 * (Math.Log(U1))) * Math.Sin(2 * Math.PI * U2);
@@ -75,8 +73,18 @@ namespace BrownianTree
             double n = G * Math.Sqrt((Math.PI * S) / timeStep);
 
             //perform 4th order Runge-Kutta scheme on (2)
+            double k1, k2, k3, k4, newVelocity;
+            k1 = n + (1 / relaxTime) * prevVelocity;
+            k2 = n + (1 / relaxTime) * (prevVelocity + (timeStep / 2) * k1);
+            k3 = n + (1 / relaxTime) * (prevVelocity + (timeStep / 2) * k2);
+            k4 = n + (1 / relaxTime) * (prevVelocity + timeStep * k3);
+            newVelocity = prevVelocity + (1.0 / 6.0) * timeStep * (k1 + 2 * k2 + 2 * k3 + k4);
+
             //perform forward Euler scheme on (1)
-            return result;
+            double newPosition;
+            newPosition = prevPosition + timeStep * newVelocity;
+
+            return result = new Vector(newPosition, newVelocity);
         }
     }
 }
